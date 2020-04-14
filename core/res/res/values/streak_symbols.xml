@@ -81,4 +81,6 @@
   <!-- Whether device supports internal audio recording -->
   <java-symbol type="bool" name="config_hasInternalAudioRecordingSupport" />
 
+  <!-- Enable face auth when swiping security view -->
+  <java-symbol type="bool" name="config_faceAuthOnSecurityView" />
 </resources>
