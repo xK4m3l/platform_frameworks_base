@@ -4995,6 +4995,13 @@ public final class Settings {
         public static final String SHOW_FOURG = "show_fourg";
 
         /**
+         * Whether to pulse ambient on new music tracks
+         *
+         * @hide
+         */
+        public static final String PULSE_ON_NEW_TRACKS = "pulse_on_new_tracks";
+
+        /**
          * Whether to show VoLTE icon or not
          * @hide
          */
