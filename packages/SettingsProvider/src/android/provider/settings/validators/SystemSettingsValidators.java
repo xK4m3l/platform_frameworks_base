@@ -245,5 +245,6 @@ public class SystemSettingsValidators {
                         return true;
                     }
                 });
+        VALIDATORS.put(System.FOD_GESTURE, BOOLEAN_VALIDATOR);
     }
 }
