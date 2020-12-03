@@ -5243,6 +5243,11 @@ public final class Settings {
         public static final String SMART_SPACE = "smart_space";
 
         /**
+         * @hide
+         */
+        public static final String REFRESH_RATE_SETTING = "refresh_rate_setting";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
