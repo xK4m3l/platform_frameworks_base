@@ -104,5 +104,6 @@ public class SystemSettings {
         Settings.System.RINGTONE_VIBRATION_PATTERN,
         Settings.System.SMART_SPACE,
         Settings.System.COLOR_BUCKET_OVERLAY
+        Settings.System.REFRESH_RATE_SETTING,
     };
 }

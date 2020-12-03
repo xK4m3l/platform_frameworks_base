@@ -5243,6 +5243,7 @@ public final class Settings {
         public static final String SMART_SPACE = "smart_space";
 
         /**
+         * Refresh rate
          * @hide
          */
         public static final String REFRESH_RATE_SETTING = "refresh_rate_setting";
@@ -5385,6 +5386,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(ALLOW_INCALL_HOME);
             PRIVATE_SETTINGS.add(BACK_GESTURE_HAPTIC);
             PRIVATE_SETTINGS.add(CENTER_NOTIFICATION_HEADERS);
+            PRIVATE_SETTINGS.add(REFRESH_RATE_SETTING);
             PRIVATE_SETTINGS.add(QS_PANEL_BG_USE_NEW_TINT);
         }
 

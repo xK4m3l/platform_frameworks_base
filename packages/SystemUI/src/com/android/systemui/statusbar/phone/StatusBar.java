@@ -4397,7 +4397,10 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_PANEL_BG_USE_NEW_TINT),
                     false, this, UserHandle.USER_ALL);
-        }
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.REFRESH_RATE_SETTING),
+                    false, this, UserHandle.USER_ALL);
+	}
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
@@ -4408,6 +4411,8 @@ public class StatusBar extends SystemUI implements DemoMode,
             } else if (uri.equals(Settings.System.getUriFor(
                     Settings.System.DOUBLE_TAP_SLEEP_GESTURE))) {
                 setLockscreenDoubleTapToSleep();
+            } else if (uri.equals(Settings.System.getUriFor(Settings.System.REFRESH_RATE_SETTING))) {
+                setRefreshRate();
             } else if (uri.equals(Settings.System.getUriFor(Settings.System.QS_PANEL_BG_USE_NEW_TINT))) {
                 mQSPanel.getHost().reloadAllTiles();
             }
@@ -4420,6 +4425,40 @@ public class StatusBar extends SystemUI implements DemoMode,
             setHeadsUpBlacklist();
             setScreenBrightnessMode();
             setUseLessBoringHeadsUp();
+	    setRefreshRate();
+        }
+    }
+
+    private void setRefreshRate() {
+        final boolean variableRefreshRate = mContext.getResources().getBoolean(
+                com.android.internal.R.bool.config_hasVariableRefreshRate);
+        if (variableRefreshRate) {
+            final int maxRefreshRate = mContext.getResources().getInteger(
+                    com.android.internal.R.integer.config_maxRefreshRate);
+            final int refreshRate = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.REFRESH_RATE_SETTING, 0);
+
+            switch (refreshRate) {
+                case 0:
+                default:
+                    Settings.System.putInt(mContext.getContentResolver(),
+                            Settings.System.PEAK_REFRESH_RATE, maxRefreshRate);
+                    Settings.System.putInt(mContext.getContentResolver(),
+                            Settings.System.MIN_REFRESH_RATE, 60);
+                    break;
+                case 1:
+                    Settings.System.putInt(mContext.getContentResolver(),
+                            Settings.System.PEAK_REFRESH_RATE, 60);
+                    Settings.System.putInt(mContext.getContentResolver(),
+                            Settings.System.MIN_REFRESH_RATE, 60);
+                    break;
+                case 2:
+                    Settings.System.putInt(mContext.getContentResolver(),
+                            Settings.System.PEAK_REFRESH_RATE, maxRefreshRate);
+                    Settings.System.putInt(mContext.getContentResolver(),
+                            Settings.System.MIN_REFRESH_RATE, maxRefreshRate);
+                    break;
+            }
         }
     }
 
