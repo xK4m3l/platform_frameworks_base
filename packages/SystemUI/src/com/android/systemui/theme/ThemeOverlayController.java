@@ -432,7 +432,6 @@ public class ThemeOverlayController extends SystemUI implements Dumpable {
         String str;
         String str2;
         ColorScheme colorScheme = new ColorScheme(context);
-        colorScheme = colorScheme;
         if (type == 1) {
             list = colorScheme.getAllAccentColors();
             str = "accent";
@@ -440,27 +439,21 @@ public class ThemeOverlayController extends SystemUI implements Dumpable {
             list = colorScheme.getAllNeutralColors();
             str = "neutral";
         }
-        ColorScheme colorScheme2 = colorScheme;
-        int size = colorScheme2.getAccent1().size();
+        int size = colorScheme.getAccent1().size();
         FabricatedOverlay.Builder builder = new FabricatedOverlay.Builder("com.android.systemui", str, "android");
         int i3 = 0;
         int size2 = list.size() - 1;
         if (size2 >= 0) {
-            while (true) {
+            while (true) { // the loop does end, there's a if check with break within, the loop does end my friends. it does infact end.
                 int i4 = i3 + 1;
                 int i5 = i3 % size;
                 int i6 = (i3 / size) + 1;
+                int i7 = 15 - 1;
                 if (i5 == 0) {
                     str2 = "android:color/system_" + str + i6 + "_10";
                 } else if (i5 != 1) {
                     StringBuilder sb = new StringBuilder();
-                    sb.append("android:color/system_");
-                    sb.append(str);
-                    sb.append(i6);
-                    sb.append('_');
-                    sb.append(i5 - 1);
-                    sb.append("00");
-                    str2 = sb.toString();
+                    str2 = "android:color/system_" + str + i6 + "_" + i7 + "00"
                 } else {
                     str2 = "android:color/system_" + str + i6 + "_50";
                 }
