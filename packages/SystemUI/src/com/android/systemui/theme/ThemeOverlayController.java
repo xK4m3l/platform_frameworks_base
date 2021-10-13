@@ -450,7 +450,7 @@ public class ThemeOverlayController extends SystemUI implements Dumpable {
                 } else {
                     resourceName += "_" + (c - 1) + "00";
                 }
-                overlayBuilder.setResourceValue(resourceName, TypedValue.TYPE_FIRST_COLOR_INT,
+                overlayBuilder.setResourceValue(resourceName, 28,
                         setAlphaComponent(colorList.get(a), 255));
                 if (b > colorListSize) break;
                 a = b;
