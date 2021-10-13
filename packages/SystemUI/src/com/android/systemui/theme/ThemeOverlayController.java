@@ -428,45 +428,36 @@ public class ThemeOverlayController extends SystemUI implements Dumpable {
      * Given a color candidate, return an overlay definition.
      */
     protected @Nullable FabricatedOverlay getOverlay(int color, int type) {
-        List<Integer> list;
-        String str;
-        String str2;
         ColorScheme colorScheme = new ColorScheme(context);
-        if (type == 1) {
-            list = colorScheme.getAllAccentColors();
-            str = "accent";
-        } else {
-            list = colorScheme.getAllNeutralColors();
-            str = "neutral";
-        }
-        int size = colorScheme.getAccent1().size();
-        FabricatedOverlay.Builder builder = new FabricatedOverlay.Builder("com.android.systemui", str, "android");
-        int i3 = 0;
-        int size2 = list.size() - 1;
-        if (size2 >= 0) {
-            while (true) { // the loop does end, there's a if check with break within, the loop does end my friends. it does infact end.
-                int i4 = i3 + 1;
-                int i5 = i3 % size;
-                int i6 = (i3 / size) + 1;
-                int i7 = 15 - 1;
-                if (i5 == 0) {
-                    str2 = "android:color/system_" + str + i6 + "_10";
-                } else if (i5 != 1) {
-                    StringBuilder sb = new StringBuilder();
-                    str2 = "android:color/system_" + str + i6 + "_" + i7 + "00"
+        List<Integer> colorList = type == ACCENT
+                ? colorScheme.getAllAccentColors() : colorScheme.getAllNeutralColors();
+        String name = type == ACCENT ? "accent" : "neutral";
+        int accent1Size = colorScheme.getAccent1().size();
+        final FabricatedOverlay.Builder overlayBuilder = new FabricatedOverlay.Builder(
+                "com.android.systemui", name, "android");
+        int colorListSize = colorList.size() - 1;
+        if (colorListSize >= 0) {
+            int a = 0;
+            while (true) {
+                int b = a + 1;
+                int c = a % accent1Size;
+                int d = (a / accent1Size) + 1;
+                String resourceName = "android:color/system_" + name + d;
+                if (c == 0) {
+                    resourceName += "_10";
+                } else if (c == 1) {
+                    resourceName += "_50";
                 } else {
-                    str2 = "android:color/system_" + str + i6 + "_50";
+                    resourceName += "_" + (c - 1) + "00";
                 }
-                builder.setResourceValue(str2, 28, setAlphaComponent(list.get(i3).intValue(), 255));
-                if (i4 > size2) {
-                    break;
-                }
-                i3 = i4;
+                overlayBuilder.setResourceValue(resourceName, TypedValue.TYPE_FIRST_COLOR_INT,
+                        setAlphaComponent(colorList.get(a), 255));
+                if (b > colorListSize) break;
+                a = b;
             }
         }
-        return builder.build();
+        return overlayBuilder.build();
     }
-
     public static int setAlphaComponent(int i, int i2) {
         if (i2 >= 0 && i2 <= 255) {
             return (i & 16777215) | (i2 << 24);

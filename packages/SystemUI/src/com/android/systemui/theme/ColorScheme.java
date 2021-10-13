@@ -1,31 +1,34 @@
 package com.android.systemui.theme;
 
-import java.util.ArrayList;
-import java.util.List;
-import com.streak.support.monet.colorgiber;
 import android.content.Context;
+
+import com.streak.support.monet.colorgiber;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 public final class ColorScheme {
     private final List<Integer> accent1;
     private final List<Integer> accent2;
     private final List<Integer> accent3;
     private final List<Integer> neutral1;
     private final List<Integer> neutral2;
+
     Integer[] iArr1 = new Integer[12];
     Integer[] iArr2 = new Integer[12];
     Integer[] iArr3 = new Integer[12];
     Integer[] iArr4 = new Integer[12];
     Integer[] iArr5 = new Integer[12];
+
     public ColorScheme(Context context) {
         colorgiber cg = new colorgiber(context);
-        int i = 0;
-        while (i < 12) {
+        for (int i = 0; i < 12; i++) {
             iArr1[i] = cg.noSysPriviledgeMoment(1, i);
             iArr2[i] = cg.noSysPriviledgeMoment(2, i);
             iArr3[i] = cg.noSysPriviledgeMoment(3, i);
             iArr4[i] = cg.noSysPriviledgeMoment(4, i);
             iArr5[i] = cg.noSysPriviledgeMoment(5, i);
-            i=i+1;
         }
         accent1 = Arrays.asList(iArr1);
         accent2 = Arrays.asList(iArr2);
@@ -47,7 +50,7 @@ public final class ColorScheme {
     }
 
     public final List<Integer> getAllAccentColors() {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.addAll(accent1);
         arrayList.addAll(accent2);
         arrayList.addAll(accent3);
@@ -55,7 +58,7 @@ public final class ColorScheme {
     }
 
     public final List<Integer> getAllNeutralColors() {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList<>();
         arrayList.addAll(neutral1);
         arrayList.addAll(neutral2);
         return arrayList;
