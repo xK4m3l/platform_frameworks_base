@@ -562,8 +562,6 @@ open class QSTileViewImpl @JvmOverloads constructor(
 internal object SubtitleArrayMapping {
     private val subtitleIdsMap = mapOf<String?, Int>(
         "internet" to R.array.tile_states_internet,
-        "wifi" to R.array.tile_states_wifi,
-        "cell" to R.array.tile_states_cell,
         "battery" to R.array.tile_states_battery,
         "dnd" to R.array.tile_states_dnd,
         "flashlight" to R.array.tile_states_flashlight,
